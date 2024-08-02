@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -7,7 +8,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import mongoose from "mongoose";
+import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
 import { register } from "./controllers/auth.js";
 
 
@@ -41,6 +43,7 @@ app.post('/auth/register', upload.single("picture"), register);
 
 /* ROUTES */
 app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
